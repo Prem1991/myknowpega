@@ -1,0 +1,18 @@
+docker –version
+
+docker run Jenkins/Jenkins
+
+
+docker run -p 8090:8080 jenkins/Jenkins
+
+docker ps
+
+docker volume create Jenkins
+
+docker image inspect jenkins/Jenkins
+
+docker run –p 8090:8080 –v  jenkins:/var/jenkins_home
+
+docker run -p 8092:8080 -v jenkins:/var/jenkins_home jenkins/jenkins
+
+docker run -p 8093:8080 -v C:\docker:/var/jenkins_home jenkins/Jenkins

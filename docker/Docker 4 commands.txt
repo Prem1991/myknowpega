@@ -1,0 +1,17 @@
+docker build –t pegapostgres:11 .
+
+Docker volume create pegaapp
+
+docker volume ls
+
+docker run --name pegapostgres -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -v pegaapp:/var/lib/postgresql-persist/data pegapostgres:11
+
+docker cp pega.dump pegapostgres:/var/lib/postgresql-persist/data
+
+pg_restore -U postgres -d postgres pega.dump
+
+docker build –t pegawebapp:851 .
+
+docker run --name pegawebapp -p 8080:8080 -e JDBC_URL=jdbc:postgresql://pegapostgres:5432/postgres –link pegapostgres:pegapostgres -e JDBC_CLASS=org.postgresql.Driver -e DB_USERNAME=postgres -e DB_PASSWORD=postgres pegawebapp:851
+
+
