@@ -2,7 +2,6 @@ docker –version
 
 docker run Jenkins/Jenkins
 
-
 docker run -p 8090:8080 jenkins/Jenkins
 
 docker ps
